@@ -1457,7 +1457,8 @@ void MsgReceivedData(char *input) {
 		EvaluateCommand(pythonCode);
 
 		char path[PATH_MAX];
-		StringFormat(path, sizeof(path), "%s/.config/gf2_watch.txt", getenv("HOME"));
+		getcwd(localConfigDirectory, sizeof(localConfigDirectory));
+		StringFormat(path, sizeof(path), "%s/gf2_watch.txt", localConfigDirectory);
 		char *data = LoadFile(path, NULL);
 
 		while (data && restoreWatchWindow) {
@@ -1927,7 +1928,8 @@ int main(int argc, char **argv) {
 	DebuggerClose();
 
 	if (restoreWatchWindow && firstWatchWindow) {
-		StringFormat(globalConfigPath, sizeof(globalConfigPath), "%s/.config/gf2_watch.txt", getenv("HOME"));
+	  getcwd(localConfigDirectory, sizeof(localConfigDirectory));
+		StringFormat(globalConfigPath, sizeof(globalConfigPath), "%s/gf2_watch.txt", localConfigDirectory);
 		FILE *f = fopen(globalConfigPath, "wb");
 
 		if (f) {
