@@ -1,11 +1,98 @@
 # **gf** – A GDB Frontend
 
-![Build status](https://img.shields.io/github/actions/workflow/status/nakst/gf/ci.yml?branch=master)
- 
-![Screenshot of the debugger's interface, showing the source view, breakpoints list, call stack, bitmap viewer, and command prompt.](https://raw.githubusercontent.com/nakst/cdn/main/gf2.png)
-![Another screenshot, showing the watch window and different color scheme.](https://raw.githubusercontent.com/nakst/cdn/main/gf1.png)
-![Another screenshot, showing the disassembly and register windows.](https://raw.githubusercontent.com/nakst/cdn/main/gf3.png)
+# LinArcX/gf 
+#### GF
+<img width="1821" height="1049" alt="screenshot_2026_06_ 6_22_36_47" src="https://github.com/user-attachments/assets/3485bd75-b5cd-4583-bf47-03cc30323a2d" />
 
+#### Commands
+<img width="726" height="975" alt="commands" src="https://github.com/user-attachments/assets/8f52d2de-7c78-4ec9-81a5-93d2e04ab588" />
+
+#### Watch & View
+<img width="728" height="621" alt="watchAndView" src="https://github.com/user-attachments/assets/06e505e5-5139-4adb-94c1-2a728cf4f68d" />
+
+#### CmdSearch
+<img width="731" height="470" alt="CmdSearch" src="https://github.com/user-attachments/assets/e485fe9f-f53e-4110-8423-a3ee748facfd" />
+
+#### Registers
+<img width="719" height="747" alt="registers" src="https://github.com/user-attachments/assets/b6324142-da78-44a1-ac2a-cc822169574c" />
+
+#### Memory
+<img width="735" height="460" alt="Memory" src="https://github.com/user-attachments/assets/467f8f0c-ddf3-4058-9967-3baf0fb4cbd2" />
+
+#### ASM
+<img width="728" height="576" alt="ASM" src="https://github.com/user-attachments/assets/15af5a23-5cfd-4e12-a156-e809bdddf8f3" />
+
+## ~/.config/gf2_config.ini  
+```
+[gdb]
+log_all_output=1
+
+[ui]
+scale=1
+maximize=1
+font_size_code=14
+font_size_interface=13
+selectable_source=1
+restore_watch_window=1
+font_path=$HOME/.local/share/fonts/FiraCode-VF.ttf
+layout=h(60,v(70,Source,Console),v(45,t(Commands,Breakpoints,Files,Data,Memory,View,Log,CmdSearch),t(Locals,Watch,Stack,Registers,ASM,Struct,Thread,Prof))))
+
+[shortcuts]
+F5=run
+Ctrl+I=print i
+Ctrl+Shift+F10=reverse-next
+Ctrl+Shift+F11=reverse-step
+
+[commands]
+Clear REPL=!xdotool key ctrl+l
+Asm View=disassemble /m
+Run=r&
+Save Breakpoints=save breakpoints breakpoints.gdb
+Info Breakpoints=info breakpoints
+Set Breakpoints=b main
+Delete all breakpoints=clear
+Backtrace=bt
+Backtrace full=backtrace full
+Frame=frame
+Disassemble=disassemble
+Info threads=info threads
+Info files=i files
+Info sharedlibrary=info sharedlibrary
+Info all registers=info all-registers
+Info dcache=i dcache
+Info auxv=info auxv
+Info float=info float
+Info frame=info frame
+Info linker-namespaces=info linker-namespaces
+Info program=i program
+Info set=i set
+Info auto load=i auto-load
+Info bookmarks=i bookmarks
+Info source=i source
+Info sources=i sources
+Info types=i types
+Info target=i target
+Info connections=i connections
+Info signals=info signals
+SCC=shell scc -p -a -u -i c,h,md,cpp,c++,hpp,txt,json,s,ld
+```
+
+## .project.gf
+You can put this `.project.gf` in the root of your software:
+
+```
+[commands]
+file=shell file <FOO>
+size=shell size --common -t -d -A <FOO>
+strings=shell strings <FOO>
+readelf=shell readelf -a -h -g -t -s -d <FOO>
+ldd=shell ldd <FOO>
+nm=shell nm <FOO>
+objdump=shell objdump -x -d -p -f -a -t -r <FOO>
+```
+Replace <FOO> with your binary.
+
+# nakst/gf
 ## Building
 
 Download this project's source.
